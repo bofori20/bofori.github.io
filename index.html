@@ -1,329 +1,414 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>My Portfolio</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Bright Ofori's portfolio featuring fraud detection, credit risk analytics, machine learning, and financial data science projects.">
+  <title>Bright Ofori | Risk, Fraud & Financial Data Science</title>
 
-  <!-- Bootstrap CDN -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
 
   <style>
-    * {
-      margin: 0;
-      padding: 0;
+    :root {
+      --navy: #0b1f3a;
+      --blue: #1463ff;
+      --light-blue: #eaf1ff;
+      --ink: #172033;
+      --muted: #5f6b7a;
+      --surface: #f6f8fc;
+    }
+
+    html {
       scroll-behavior: smooth;
-      box-sizing: border-box;
+      scroll-padding-top: 76px;
     }
 
     body {
-      font-family: Arial, sans-serif;
+      color: var(--ink);
+      background-color: #fff;
     }
 
-    /* Sticky Navbar */
-    nav {
-      position: sticky;
-      top: 0;
-      background-color: #111;
-      z-index: 999;
-      display: flex;
-      justify-content: center;
-      padding: 15px 0;
+    .navbar {
+      background-color: rgba(11, 31, 58, 0.97);
+      backdrop-filter: blur(8px);
     }
 
-    nav a {
-      color: white;
-      text-decoration: none;
-      margin: 0 20px;
-      font-size: 1rem;
-      transition: color 0.3s ease;
+    .navbar-brand {
+      letter-spacing: 0.02em;
     }
 
-    nav a:hover {
-      color: #ff69b4;
+    .nav-link {
+      color: rgba(255, 255, 255, 0.82);
     }
 
-    section {
-      padding: 80px 20px;
-      min-height: 100vh;
-      text-align: center;
-    }
-
-    /* About */
-    .about-container {
-      max-width: 900px;
-      margin: 0 auto;
-    }
-
-    .about-image img {
-      width: 160px;
-      height: 160px;
-      object-fit: cover;
-      border-radius: 25px;
-      background-color: #999;
-      margin-bottom: 30px;
-    }
-
-    .about-text p {
-      font-size: 1.1rem;
-      line-height: 1.7;
-      margin-bottom: 20px;
-      max-width: 750px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    /* Projects */
-    .card-img-top {
-      border-top-left-radius: 1rem;
-      border-top-right-radius: 1rem;
-      height: 180px;
-      object-fit: cover;
-    }
-
-    .card {
-      border: none;
-      border-radius: 1rem;
-      box-shadow: 0 0 12px rgba(0, 0, 0, 0.05);
-    }
-
-    /* Skills */
-    .bg-pink {
-      background-color: #d64db2 !important;
-    }
-
-    /* Contact */
-    .contact-section {
-      background-color: #000;
+    .nav-link:hover,
+    .nav-link:focus {
       color: #fff;
     }
 
-    .contact-section img {
-      width: 70px;
-      height: 70px;
-      padding: 10px;
+    .hero {
+      min-height: 92vh;
+      padding-top: 7rem;
+      padding-bottom: 5rem;
+      background:
+        radial-gradient(circle at 85% 20%, rgba(20, 99, 255, 0.22), transparent 30%),
+        linear-gradient(135deg, #071427 0%, var(--navy) 62%, #123d74 100%);
     }
 
-    .contact-section p {
-      margin-top: 0.5rem;
-      font-size: 1rem;
+    .eyebrow {
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
     }
 
-    @media (max-width: 576px) {
-      .contact-section img {
-        width: 60px !important;
-        height: 60px !important;
+    .hero-title {
+      max-width: 850px;
+    }
+
+    .hero-copy {
+      max-width: 760px;
+      color: rgba(255, 255, 255, 0.78);
+    }
+
+    .metric-card {
+      background-color: rgba(255, 255, 255, 0.09);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .section-space {
+      padding-top: 6rem;
+      padding-bottom: 6rem;
+    }
+
+    .section-label {
+      color: var(--blue);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .profile-photo {
+      width: 240px;
+      height: 240px;
+      object-fit: cover;
+      border: 8px solid #fff;
+      box-shadow: 0 1rem 3rem rgba(11, 31, 58, 0.16);
+    }
+
+    .projects-section,
+    .skills-section {
+      background-color: var(--surface);
+    }
+
+    .project-card {
+      border: 1px solid #e4e9f2;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 1rem 2.5rem rgba(11, 31, 58, 0.12) !important;
+    }
+
+    .project-visual {
+      min-height: 180px;
+      background: linear-gradient(135deg, var(--navy), var(--blue));
+    }
+
+    .project-visual.credit {
+      background: linear-gradient(135deg, #123524, #198754);
+    }
+
+    .project-visual.market {
+      background: linear-gradient(135deg, #3b185f, #7b2cbf);
+    }
+
+    .project-icon {
+      font-size: 4rem;
+    }
+
+    .badge-soft {
+      color: #174ea6;
+      background-color: var(--light-blue);
+      border: 1px solid #cddcff;
+    }
+
+    .skill-card {
+      border: 1px solid #e4e9f2;
+    }
+
+    .skill-icon {
+      width: 52px;
+      height: 52px;
+      color: var(--blue);
+      background-color: var(--light-blue);
+    }
+
+    .contact-section {
+      background-color: var(--navy);
+    }
+
+    .contact-link {
+      color: rgba(255, 255, 255, 0.82);
+    }
+
+    .contact-link:hover,
+    .contact-link:focus {
+      color: #fff;
+    }
+
+    @media (max-width: 767.98px) {
+      .hero {
+        min-height: auto;
       }
 
-      .contact-section span {
-        font-size: 1rem !important;
+      .profile-photo {
+        width: 190px;
+        height: 190px;
       }
     }
   </style>
 </head>
-<body>
 
-  <!-- Navigation -->
-  <nav>
-    <a href="#home">Home</a>
-    <a href="#about">About</a>
-    <a href="#projects">Projects</a>
-    <a href="#skills">Skills</a>
-    <a href="#contact">Contact</a>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark sticky-top shadow-sm" aria-label="Primary navigation">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="#home">Bright Ofori</a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#portfolioNav" aria-controls="portfolioNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="portfolioNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+          <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+          <li class="nav-item"><a class="btn btn-outline-light ms-lg-2" href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
   </nav>
 
-  <!-- Home -->
-<section id="home" style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh; background-color: #f7f7f7;">
-  <div class="container text-center">
-    <h1 class="fw-bold mb-3" style="font-size: 3rem;">Hi, I'm Bright Ofori</h1>
-    <p class="lead" style="font-size: 1.25rem; max-width: 700px; margin: 0 auto;">
-      A data science professional with a strong background in finance and a passion for turning data into actionable insights. Explore my work in machine learning, predictive modeling, and analytics-driven strategy.
-    </p>
-    <a href="#projects" class="btn btn-primary mt-4 px-4 py-2" style="font-size: 1rem;">View My Projects</a>
-  </div>
-</section>
+  <main>
+    <section id="home" class="hero d-flex align-items-center text-white">
+      <div class="container">
+        <div class="row align-items-center g-5">
+          <div class="col-lg-8">
+            <p class="eyebrow fw-semibold text-info mb-3">Risk • Fraud • Financial Data Science</p>
+            <h1 class="hero-title display-3 fw-bold lh-sm mb-4">Turning banking experience into responsible, data-driven risk decisions.</h1>
+            <p class="hero-copy fs-5 lh-lg mb-4">
+              I’m Bright Ofori, a banking professional and data scientist with more than five years of experience across lending operations, relationship banking, and customer financial services.
+            </p>
+            <div class="d-flex flex-column flex-sm-row gap-3">
+              <a class="btn btn-primary btn-lg px-4" href="#projects">Explore projects</a>
+              <a class="btn btn-outline-light btn-lg px-4" href="https://www.linkedin.com/in/bright-ofori" target="_blank" rel="noopener noreferrer">View LinkedIn</a>
+            </div>
+          </div>
 
-
-<!-- About -->
-<section id="about">
-  <div class="about-container">
-    <h2>About</h2>
-    <div class="about-image">
-      <img src="images/about/1.jpg" alt="Profile Image" />
-    </div>
-    <div class="about-text">
-      <p>
-        I'm Bright Ofori, a data science professional with a strong foundation in finance and a deep passion for leveraging data to solve real-world problems. With over a decade of experience in banking and relationship management, I have transitioned into data science to combine my analytical mindset with modern machine learning and statistical techniques.
-      </p>
-      <p>
-        I bring hands-on experience in building predictive models, deploying end-to-end machine learning pipelines, and analyzing complex datasets. My projects range from early risk detection systems in education to innovative digital platforms like Scribble Stadium, where I led data augmentation research and supported infrastructure deployment on AWS.
-      </p>
-      <p>
-        My unique blend of business acumen and technical expertise enables me to approach data challenges from a strategic, stakeholder-focused perspective. I'm proficient in Python, R, SQL, scikit-learn, TensorFlow, and various data visualization tools, allowing me to deliver actionable insights across domains.
-      </p>
-      <p>
-        I’m committed to creating impactful, data-driven solutions that bridge the gap between insight and implementation—whether it's working with structured financial data or developing tools that enhance engagement and retention.
-      </p>
-    </div>
-  </div>
-</section>
-
-
-<!-- Projects -->
-<section id="projects">
-  <h2 class="fw-bold mb-4">Projects</h2>
-  <div class="container">
-    <div class="row g-4 justify-content-center">
-      
-<!-- Project 1 -->
-<div class="col-md-4">
-  <div class="card h-100">
-    <a href="https://portfolio-projects-d5b8d337436a.herokuapp.com" target="_blank">
-      <img src="images/projects/exchange.jpg" class="card-img-top" alt="Project 1">
-    </a>
-    <div class="card-body">
-      <h5 class="card-title fw-bold">
-        <a href="https://portfolio-projects-d5b8d337436a.herokuapp.com" target="_blank" class="text-decoration-none text-dark">Project 1</a>
-      </h5>
-      <p class="card-text">This project uses historical NASDAQ data to analyze patterns and build a model that predicts future stock price movements, helping inform investment decisions.</p>
-      <div class="fw-bold">
-        <a href="https://medium.com/@bright.ofori.bo/predicting-stock-prices-using-historical-data-and-lstm-in-python-0b7e830c3ffe" target="_blank" rel="noopener noreferrer">Blog Post</a> |
-        <a href="https://github.com/bofori20/web_stock_price_predictor" target="_blank" rel="noopener noreferrer">Source Code</a>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Project 2 -->
-<div class="col-md-4">
-  <div class="card h-100">
-    <a href="https://credit-risk-predictor-42a5a9f43402.herokuapp.com" target="_blank">
-      <img src="images/projects/creditrisk.jpg" class="card-img-top" alt="Project 2">
-    </a>
-    <div class="card-body">
-      <h5 class="card-title fw-bold">
-        <a href="https://credit-risk-predictor-42a5a9f43402.herokuapp.com" target="_blank" class="text-decoration-none text-dark">Project 2</a>
-      </h5>
-      <p class="card-text">This project analyzes credit risk data to predict whether a customer is likely to be safe or risky, helping lenders make informed loan decisions.</p>
-      <div class="fw-bold">
-        <a href="https://medium.com/@bright.ofori.bo/predicting-credit-risk-a-machine-learning-approach-with-python-f10659670ba8" target="_blank" rel="noopener noreferrer">Blog Post</a> |
-        <a href="https://github.com/bofori20/credit-risk-app" target="_blank" rel="noopener noreferrer">Source Code</a>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Project 3 -->
-<div class="col-md-4">
-  <div class="card h-100">
-    <a href="https://insurance-payment-app-9e83fcacfd6d.herokuapp.com/" target="_blank">
-      <img src="images/projects/health-insurance.png" class="card-img-top" alt="Project 3">
-    </a>
-    <div class="card-body">
-      <h5 class="card-title fw-bold">
-        <a href="https://insurance-payment-app-9e83fcacfd6d.herokuapp.com/" target="_blank" class="text-decoration-none text-dark">Project 3</a>
-      </h5>
-      <p class="card-text">By analyzing health insurance payment data, this project provides estimates of claims to be paid, assisting insurers in making informed decisions.</p>
-      <div class="fw-bold">
-        <a href="https://medium.com/@bright.ofori.bo/predicting-credit-risk-a-machine-learning-approach-with-python-f10659670ba8" target="_blank" rel="noopener noreferrer">Blog Post</a> |
-        <a href="https://github.com/bofori20/Health-Insurance-Payment-Prediction-App" target="_blank" rel="noopener noreferrer">Source Code</a>
-      </div>
-    </div>
-  </div>
-</div>
-    </div>
-  </div>
-</section>
-
-
-
-
-  <!-- Skills -->
-<section id="skills">
-  <div class="container">
-    <h2 class="fw-bold mb-5 text-center">Skills</h2>
-    <div class="row text-center g-4">
-
-      <!-- Python -->
-      <div class="col-md-3">
-        <img src="images/skills/1.png" alt="Python Icon" class="mb-3" style="width: 100px;">
-        <h5 class="fw-bold">Python</h5>
-        <p>
-          Experienced in using Python for data analysis, machine learning, automation, and scripting. Strong understanding of libraries like Pandas, NumPy, scikit-learn, and TensorFlow.
-        </p>
-      </div>
-
-      <!-- Data Visualization -->
-      <div class="col-md-3">
-        <img src="images/skills/2.png" alt="Data Visualization Icon" class="mb-3" style="width: 100px;">
-        <h5 class="fw-bold">Data Visualization</h5>
-        <p>
-          Proficient in creating insightful visualizations using Matplotlib, Seaborn, and Tableau to communicate trends, patterns, and insights clearly and effectively.
-        </p>
-      </div>
-
-      <!-- SQL -->
-      <div class="col-md-3">
-        <img src="images/skills/3.png" alt="SQL Icon" class="mb-3" style="width: 100px;">
-        <h5 class="fw-bold">SQL</h5>
-        <p>
-          Skilled in writing complex SQL queries for data extraction, transformation, and analysis across relational databases including PostgreSQL and MySQL.
-        </p>
-      </div>
-
-      <!-- Data Storytelling -->
-      <div class="col-md-3">
-        <img src="images/skills/4.png" alt="Data Storytelling Icon" class="mb-3" style="width: 100px;">
-        <h5 class="fw-bold">Data Storytelling</h5>
-        <p>
-          Adept at transforming data into compelling narratives that drive decision-making, blending analytical insight with business context for maximum impact.
-        </p>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-  <!-- Contact -->
-  <section id="contact" class="contact-section py-5">
-    <div class="container text-center">
-      <h2 class="fw-bold mb-4">Contact Me</h2>
-  
-      <div class="d-flex justify-content-center align-items-center flex-wrap gap-4 mb-4">
-        <div class="d-flex align-items-center">
-          <img src="https://img.icons8.com/ios-filled/40/ffffff/new-post.png" alt="Email" class="me-2" />
-          <span class="fs-5 fw-bold">bright.ofori.bo@gmail.com</span>
-        </div>
-        <div class="d-flex align-items-center">
-          <img src="https://img.icons8.com/ios-filled/40/ffffff/phone.png" alt="Phone" class="me-2" />
-          <span class="fs-5 fw-bold">5109267406</span>
+          <div class="col-lg-4">
+            <div class="metric-card rounded-4 p-4">
+              <p class="small text-uppercase fw-semibold text-info mb-3">Portfolio focus</p>
+              <div class="d-flex align-items-start gap-3 mb-4">
+                <i class="bi bi-shield-check fs-3" aria-hidden="true"></i>
+                <div><h2 class="h5 mb-1">Fraud analytics</h2><p class="small mb-0 text-white-50">Rare-event detection and operational review support</p></div>
+              </div>
+              <div class="d-flex align-items-start gap-3 mb-4">
+                <i class="bi bi-bank fs-3" aria-hidden="true"></i>
+                <div><h2 class="h5 mb-1">Credit risk</h2><p class="small mb-0 text-white-50">Interpretable modeling and responsible decision support</p></div>
+              </div>
+              <div class="d-flex align-items-start gap-3">
+                <i class="bi bi-graph-up-arrow fs-3" aria-hidden="true"></i>
+                <div><h2 class="h5 mb-1">Financial analytics</h2><p class="small mb-0 text-white-50">Business-focused insight with Python, SQL, and visualization</p></div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-  
-      <div class="row justify-content-center">
-        <div class="col-6 col-sm-2 mb-4">
-          <a href="https://www.linkedin.com/in/bright-ofori" target="_blank">
-            <img src="icons/linkedin.png" alt="LinkedIn" class="rounded-circle contact-icon mb-2">
-            <p class="text-white">LinkedIn</p>
-          </a>
-        </div>
-        <div class="col-6 col-sm-2 mb-4">
-          <a href="https://github.com/bofori20" target="_blank">
-            <img src="icons/github.png" alt="GitHub" class="rounded-circle contact-icon mb-2">
-            <p class="text-white">GitHub</p>
-          </a>
-        </div>
-        <div class="col-6 col-sm-2 mb-4">
-          <a href="https://medium.com/@bright.ofori.bo" target="_blank">
-            <img src="icons/medium.png" alt="Medium" class="rounded-circle contact-icon mb-2">
-            <p class="text-white">Medium</p>
-          </a>
+    </section>
+
+    <section id="about" class="section-space">
+      <div class="container">
+        <div class="row align-items-center g-5">
+          <div class="col-lg-4 text-center">
+            <img src="images/about/1.jpg" class="profile-photo rounded-circle" alt="Bright Ofori">
+          </div>
+
+          <div class="col-lg-8">
+            <p class="section-label small fw-bold mb-2">About me</p>
+            <h2 class="display-6 fw-bold mb-4">Banking knowledge strengthened by data science</h2>
+            <p class="lead text-secondary">
+              I combine a Master’s in Data Science with more than five years of banking experience spanning lending operations, due diligence, relationship management, and customer financial services.
+            </p>
+            <p class="text-secondary lh-lg">
+              My work focuses on applying machine learning and analytics to financial-risk problems while keeping business context, model limitations, and responsible use visible. I build reproducible analytical workflows, translate model results into operational insights, and communicate findings for both technical and nontechnical stakeholders.
+            </p>
+            <p class="text-secondary lh-lg mb-0">
+              I am especially interested in risk operations, fraud strategy, credit analytics, financial data science, and roles where domain expertise and quantitative problem-solving reinforce each other.
+            </p>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Bootstrap JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <section id="projects" class="projects-section section-space">
+      <div class="container">
+        <div class="row mb-5">
+          <div class="col-lg-8">
+            <p class="section-label small fw-bold mb-2">Selected work</p>
+            <h2 class="display-6 fw-bold mb-3">Financial risk and machine-learning projects</h2>
+            <p class="lead text-secondary mb-0">Projects built to demonstrate practical modeling, evaluation, deployment, and responsible interpretation.</p>
+          </div>
+        </div>
+
+        <div class="row g-4">
+          <div class="col-lg-4">
+            <article class="card project-card h-100 rounded-4 overflow-hidden shadow-sm">
+              <div class="project-visual d-flex align-items-center justify-content-center text-white">
+                <i class="bi bi-shield-lock project-icon" aria-hidden="true"></i>
+              </div>
+              <div class="card-body d-flex flex-column p-4">
+                <div class="mb-3"><span class="badge badge-soft rounded-pill">Flagship project</span></div>
+                <h3 class="h4 fw-bold">Transaction Fraud Detection</h3>
+                <p class="text-secondary">
+                  A Streamlit decision-support application for identifying potentially fraudulent transactions in a highly imbalanced dataset using a reproducible machine-learning pipeline.
+                </p>
+                <div class="d-flex flex-wrap gap-2 mb-4">
+                  <span class="badge text-bg-light border">Python</span>
+                  <span class="badge text-bg-light border">scikit-learn</span>
+                  <span class="badge text-bg-light border">Streamlit</span>
+                  <span class="badge text-bg-light border">Fraud analytics</span>
+                </div>
+                <div class="d-flex flex-wrap gap-2 mt-auto">
+                  <a class="btn btn-primary" href="https://frauddetectionapp-je4x9bu3dsuhbgypye3v2e.streamlit.app/" target="_blank" rel="noopener noreferrer"><i class="bi bi-box-arrow-up-right me-2" aria-hidden="true"></i>Live demo</a>
+                  <a class="btn btn-outline-secondary" href="https://github.com/bofori20/fraud_detection_app" target="_blank" rel="noopener noreferrer"><i class="bi bi-github me-2" aria-hidden="true"></i>Source</a>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="col-lg-4">
+            <article class="card project-card h-100 rounded-4 overflow-hidden shadow-sm">
+              <div class="project-visual credit d-flex align-items-center justify-content-center text-white">
+                <i class="bi bi-clipboard-data project-icon" aria-hidden="true"></i>
+              </div>
+              <div class="card-body d-flex flex-column p-4">
+                <div class="mb-3"><span class="badge text-bg-success rounded-pill">Credit analytics</span></div>
+                <h3 class="h4 fw-bold">Credit Default Risk Decision Support</h3>
+                <p class="text-secondary">
+                  An interpretable credit-risk pipeline with stratified evaluation, threshold analysis, responsible feature selection, and a Flask interface for additional-review recommendations.
+                </p>
+                <div class="d-flex flex-wrap gap-2 mb-4">
+                  <span class="badge text-bg-light border">Python</span>
+                  <span class="badge text-bg-light border">Logistic regression</span>
+                  <span class="badge text-bg-light border">Flask</span>
+                  <span class="badge text-bg-light border">Model governance</span>
+                </div>
+                <div class="d-flex flex-wrap gap-2 mt-auto">
+                  <a class="btn btn-success" href="https://credit-risk-predictor-42a5a9f43402.herokuapp.com" target="_blank" rel="noopener noreferrer"><i class="bi bi-box-arrow-up-right me-2" aria-hidden="true"></i>Live demo</a>
+                  <a class="btn btn-outline-secondary" href="https://github.com/bofori20/credit-risk-app" target="_blank" rel="noopener noreferrer"><i class="bi bi-github me-2" aria-hidden="true"></i>Source</a>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="col-lg-4">
+            <article class="card project-card h-100 rounded-4 overflow-hidden shadow-sm">
+              <div class="project-visual market d-flex align-items-center justify-content-center text-white">
+                <i class="bi bi-candlestick project-icon" aria-hidden="true"></i>
+              </div>
+              <div class="card-body d-flex flex-column p-4">
+                <div class="mb-3"><span class="badge rounded-pill text-bg-secondary">Time-series exploration</span></div>
+                <h3 class="h4 fw-bold">NASDAQ Price-Movement Analysis</h3>
+                <p class="text-secondary">
+                  An exploratory machine-learning application that uses historical market data to study patterns and estimate future price movement. Results are educational and are not investment advice.
+                </p>
+                <div class="d-flex flex-wrap gap-2 mb-4">
+                  <span class="badge text-bg-light border">Python</span>
+                  <span class="badge text-bg-light border">Time series</span>
+                  <span class="badge text-bg-light border">Machine learning</span>
+                  <span class="badge text-bg-light border">Heroku</span>
+                </div>
+                <div class="d-flex flex-wrap gap-2 mt-auto">
+                  <a class="btn btn-dark" href="https://portfolio-projects-d5b8d337436a.herokuapp.com" target="_blank" rel="noopener noreferrer"><i class="bi bi-box-arrow-up-right me-2" aria-hidden="true"></i>Live demo</a>
+                  <a class="btn btn-outline-secondary" href="https://github.com/bofori20/web_stock_price_predictor" target="_blank" rel="noopener noreferrer"><i class="bi bi-github me-2" aria-hidden="true"></i>Source</a>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills" class="skills-section section-space pt-0">
+      <div class="container">
+        <div class="row mb-5">
+          <div class="col-lg-8">
+            <p class="section-label small fw-bold mb-2">Capabilities</p>
+            <h2 class="display-6 fw-bold mb-3">Technical and domain strengths</h2>
+            <p class="lead text-secondary mb-0">A combination of financial-services knowledge, analytical methods, and deployed project experience.</p>
+          </div>
+        </div>
+
+        <div class="row g-4">
+          <div class="col-md-6 col-xl-3">
+            <div class="card skill-card h-100 rounded-4 p-4 shadow-sm">
+              <div class="skill-icon rounded-3 d-flex align-items-center justify-content-center mb-4"><i class="bi bi-code-slash fs-4" aria-hidden="true"></i></div>
+              <h3 class="h5 fw-bold">Python & machine learning</h3>
+              <p class="text-secondary mb-0">Pandas, NumPy, scikit-learn, preprocessing pipelines, classification, evaluation, and deployment.</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-xl-3">
+            <div class="card skill-card h-100 rounded-4 p-4 shadow-sm">
+              <div class="skill-icon rounded-3 d-flex align-items-center justify-content-center mb-4"><i class="bi bi-database fs-4" aria-hidden="true"></i></div>
+              <h3 class="h5 fw-bold">SQL & data analysis</h3>
+              <p class="text-secondary mb-0">PostgreSQL, relational querying, data preparation, exploratory analysis, and business-focused reporting.</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-xl-3">
+            <div class="card skill-card h-100 rounded-4 p-4 shadow-sm">
+              <div class="skill-icon rounded-3 d-flex align-items-center justify-content-center mb-4"><i class="bi bi-exclamation-diamond fs-4" aria-hidden="true"></i></div>
+              <h3 class="h5 fw-bold">Risk & fraud analytics</h3>
+              <p class="text-secondary mb-0">Credit risk, fraud detection, due diligence, threshold trade-offs, operational review, and responsible use.</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-xl-3">
+            <div class="card skill-card h-100 rounded-4 p-4 shadow-sm">
+              <div class="skill-icon rounded-3 d-flex align-items-center justify-content-center mb-4"><i class="bi bi-people fs-4" aria-hidden="true"></i></div>
+              <h3 class="h5 fw-bold">Banking & stakeholders</h3>
+              <p class="text-secondary mb-0">Lending operations, document review, customer financial services, cross-functional coordination, and clear communication.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="contact-section section-space text-white">
+      <div class="container text-center">
+        <p class="eyebrow small fw-bold text-info mb-2">Let’s connect</p>
+        <h2 class="display-6 fw-bold mb-3">Interested in risk, fraud, or financial analytics?</h2>
+        <p class="lead text-white-50 mx-auto mb-4" style="max-width: 700px;">Connect with me to discuss opportunities where banking experience and data science can improve financial decision-making.</p>
+
+        <a class="btn btn-primary btn-lg px-4 mb-5" href="mailto:bright.ofori.bo@gmail.com"><i class="bi bi-envelope me-2" aria-hidden="true"></i>Email Bright</a>
+
+        <div class="d-flex justify-content-center flex-wrap gap-4">
+          <a class="contact-link text-decoration-none" href="https://www.linkedin.com/in/bright-ofori" target="_blank" rel="noopener noreferrer"><i class="bi bi-linkedin me-2" aria-hidden="true"></i>LinkedIn</a>
+          <a class="contact-link text-decoration-none" href="https://github.com/bofori20" target="_blank" rel="noopener noreferrer"><i class="bi bi-github me-2" aria-hidden="true"></i>GitHub</a>
+          <a class="contact-link text-decoration-none" href="https://medium.com/@bright.ofori.bo" target="_blank" rel="noopener noreferrer"><i class="bi bi-medium me-2" aria-hidden="true"></i>Medium</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-dark text-white-50 py-4">
+    <div class="container d-flex flex-column flex-sm-row justify-content-between align-items-center gap-2">
+      <small>&copy; 2026 Bright Ofori</small>
+      <small>Risk, fraud, and financial data science</small>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
